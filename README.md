@@ -52,9 +52,7 @@ mysql --version
 sudo apt-get update
 sudo apt-get install phpmyadmin php-mbstring php-gettext
 ```
-:::danger
-Warning: When the first prompt appears, apache2 is highlighted, but not selected. If you do not hit Space to select Apache, the installer will not move the necessary files during installation. Hit Space, Tab, and then Enter to select Apache.
-:::
+**Warning: When the first prompt appears, apache2 is highlighted, but not selected. If you do not hit Space to select Apache, the installer will not move the necessary files during installation. Hit Space, Tab, and then Enter to select Apache.**
 
 **Enable mcrypt and mbstring**
 ```
@@ -63,10 +61,13 @@ sudo phpenmod mbstring
 ```
 
 8. Permission issues
-Make sure public, storage, bootstrap/cache is open and writable.
+Make sure public, storage, bootstrap/cache is open and writable by laravel.
 
 9. Configuration
 ```php artisan key:generate```
+
+10. Setup .env
+change your database type, user name, and password to your own.
 
 
 Ref:

@@ -19,6 +19,37 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1/jquery-ui.min.js')}}"></script>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- dataPicker -->
+    <script src="{{ asset('js/datepicker/js/bootstrap-datepicker.js')}}"> </script>
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-43764481-1');
+    </script>
+
+    @yield('js')
+    @yield('style')
+
 </head>
 <body>
     <div id="app">
@@ -36,6 +67,13 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="text" class="form-control" id="checkInDate">
+                        <input type="text" class="form-control" id="checkOutDate">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -71,5 +109,19 @@
             @yield('content')
         </main>
     </div>
+    <!-- js use for all websites -->
+    <!--script src=" {{ asset('js/index.js')}}"></script-->
+    <script type='text/javascript'>                    
+        $(function () {
+            if (jQuery.ui) {
+                var datepicker = $.fn.datepicker.noConflict();
+                $.fn.bootstrapDP = datepicker;
+            } else {
+                $.fn.bootstrapDP = $.fn.datepicker;
+            }
+            $('#checkInDate').bootstrapDP();
+            $('#checkOutDate').bootstrapDP();
+        });
+    </script>
 </body>
 </html>
