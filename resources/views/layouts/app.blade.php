@@ -23,6 +23,7 @@
     <!-- Jquery -->
     <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1/jquery-ui.min.js')}}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->

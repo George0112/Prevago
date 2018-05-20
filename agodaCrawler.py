@@ -36,7 +36,7 @@ print cityList
 crawlDays = 6
 #checkIn = '2018-05-15'
 ts = time.time()
-for day in range(int(sys.argv[1])*6, crawlDays*6+6):
+for day in range(int(sys.argv[1])*6, crawlDays*int(sys.argv[1])+6):
     logFile.write("INFO: Crawler start\n")
     checkIn = datetime.date.today() + datetime.timedelta(days=day)
     checkIn = checkIn.strftime("%Y-%m-%d")
