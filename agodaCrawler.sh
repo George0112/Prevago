@@ -9,3 +9,6 @@ python agodaCrawler.py 6 &
 python agodaCrawler.py 7 &
 python agodaCrawler.py 8 &
 python agodaCrawler.py 9 &
+
+wait
+

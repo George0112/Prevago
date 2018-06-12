@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail;
+use App\Mail\Message;
 
 class RegisterController extends Controller
 {
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/registed';
 
     /**
      * Create a new controller instance.
@@ -61,12 +63,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    public function sendMail($email, $name, $token)
+  	{
+  		$data['user'] = $name;
+  		$data['buttonMessage'] = 'Activate account';
+  		$data['message'] = "\nYour are receieving this email because get your apply for an account.\n
+  Please click the following button to activate your account.\n
+  If you didn't remember this account, there's no further action is needed.";
+  		$data['url'] = '/user/activate?t='.$token.'&e='.$email;
+  		MAIL::to($email)->queue(new Message($data));
+  	}
+
     protected function create(array $data)
     {
+        $token = md5(time());
+        $this->sendMail($data['email'], $data['name'], $token);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'token' => $token,
+            'status' => 0
         ]);
     }
 }

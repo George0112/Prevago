@@ -247,7 +247,7 @@ for day in range(int(sys.argv[1])*6, crawlDays*int(sys.argv[1])+6):
                         try:
                             # Execute the SQL command
                             cursor.execute(sql, (str(hotelId)))
-                            roomIdNameList = cursor.fetchall()
+                            roomList = cursor.fetchall()
                             # Commit your changes in the database
                             db.commit()
                         except TypeError as e:
@@ -257,6 +257,7 @@ for day in range(int(sys.argv[1])*6, crawlDays*int(sys.argv[1])+6):
                             #logFile.write("ERROR: "+str(e) + "\n")
                             # Rollback in case there is any error
                             db.rollback()
+                    
                     insertPriceSql = "INSERT INTO prices (roomId, queryDate, checkInDate, price, roomLeft, supplier, created_at) VALUES "
                     for key, val in priceDict.items():
                         for k, v in val.items():
@@ -264,10 +265,10 @@ for day in range(int(sys.argv[1])*6, crawlDays*int(sys.argv[1])+6):
                                 queryDate = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
                                 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                                 totalPrice = v
-                                availability = roomDict[roomName][k]
+                                availability = roomDict[key][k]
                                 supplier = k
                                 for i in roomList:
-                                    if i[1] == roomName:
+                                    if unicode(i[1],"utf8") == key:
                                         roomId = i[0]
                                         break
                                 sql = "('%s', '%s', '%s', '%s', '%s', '%s', '%s')"%(str(roomId), queryDate, checkIn, str(totalPrice), int(availability), supplier, timestamp)+','
@@ -290,7 +291,7 @@ for day in range(int(sys.argv[1])*6, crawlDays*int(sys.argv[1])+6):
 
                                 
             pageNumber += 1
-logFile.close()
+#logFile.close()
 #print r.text
 db.close()
 logging.info('FINISH Crawling')

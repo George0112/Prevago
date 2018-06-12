@@ -1,0 +1,193 @@
+
+.account-area{
+    background-color:rgba(247,247,247,1);
+    box-shadow: 4px 4px 4px 0px inset rgba(20%,20%,40%,0.1);
+    margin-top: 30px;
+    
+}
+.left-area{
+    margin-right: 60px;
+    max-height: 683px;
+    /* overflow: scroll; */
+}
+.favoriteHotelsList,.historyList{
+    max-height: 680px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.name_content{
+    margin-left: 10px;
+}
+.email_content{
+    word-break: break-all;
+}
+.name_card{
+    display: flex;
+    justify-content:flex-start;
+}
+#user_name{
+    display:flex;
+    opacity:1;
+    height: 103px;
+    padding: 24px 20px 24px 3px;
+    background-image: linear-gradient(90deg,#bfaae8,#d8cbf5);
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px 2px  rgba(20%,20%,40%,0.3);
+}
+#user_email,#user_phone,#user_password{
+    height: 120px;
+    padding: 24px 20px;
+    box-sizing: border-box;
+    margin: 20px 0 20px 0;
+    background-color: white;
+    box-shadow: 4px 4px 4px 1px  rgba(20%,20%,40%,0.2);
+
+    font-size: 18px !important;
+    letter-spacing: 2px;
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    
+    
+}
+#header_text{
+    margin-top: 30px;
+    letter-spacing: .9px;
+    font-weight: 200;
+    width: 300px;
+    /* margin: 0; */
+    padding: 0 0 20px;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: .91;
+    color: #333;
+    box-sizing: border-box;
+}
+.emailtext,.phonetext,.passwordtext{
+    
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 2.04;
+    display: inline;
+    letter-spacing: .6px;
+    color: #333;
+}
+.user-coin{
+    width: 55px;
+    height: 55px;
+    font-size: 28px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 55px;
+    position: relative;
+    display: block;
+    float: left;
+    font-style: normal;
+    color: #fff;
+    border-radius: 50px;
+    background-size: auto;
+    background-position: 0 0;
+    background-color: #8c69ca;
+    text-align: center;
+    text-transform: uppercase;
+}
+.name{
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.edit-button,{
+    display:inline-block;
+}
+input,.email-input,.phone-input,.password-input1,.password-input2,.password-input3{
+    display:block;
+    width: 250px !important;
+    height:35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.email_editing,.phone_editing,.password_editing,.password_editing2{
+    opacity: 1;
+    display: none;
+}
+#email_edit_text,#phone_edit_text,#password_edit_text{
+    transition: .5s;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#email_cancel,#phone_cancel,.Cancel_pass{
+    margin-top: 3px;
+    color: #0283DF;
+    background-color: #fff;
+    border: 1px solid #0283DF;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 3px;
+    height:30px;
+    transition: .5s;
+}
+#email_submit,#phone_submit,#password_submit,.modify_pass{
+    color: #fff;
+    margin-top: 3px;
+    margin-left: 15px;
+    background-color: #2F9EED;
+    border: 1px solid #2F9EED;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 3px;
+    height:30px;
+    transition: .5s;
+    
+}
+.alert-success{
+    margin-bottom: 0px !important;
+}
+.fav_list_item{
+    background-color: rgb(247, 247, 247);
+    box-shadow: 4px 4px 4px 0px  rgba(20%,20%,40%,0.1);
+    display:flex;
+    align-items:center;
+    margin-bottom: 10px;
+}
+.fav_readmore{
+    text-align:right
+}
+.favoriteHotel_header_text{
+    display: inline;
+}
+.favoriteHotel_header{
+    display:flex;
+    justify-content:space-between;
+    cursor: pointer;
+}
+#his,#fav_ro{
+    color: rgba(192,192,192,0.5);
+}
+#his,#fav_hot{
+    font-size: 20px;
+}
+.form-group-b{
+    display: inline;
+}
+/* .password_editing{
+    font-size: 12px !important;
+    letter-spacing: 0px !important;
+} */
+/* .modify_pass,.Cancel_pass{
+    width: 108px;
+} */
+#form-change-password{
+    width:400px;
+}
+.favoriteRoomsList,.historyList{
+    opacity: 1;
+    display: none;
+}
+.fav_remove{
+    color:red;
+}
+.title{
+    font-size: 15px;
+    font-weight: 700;
+}

@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@section('style')
+<!--link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet"-->
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
+<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="styles/login.css">
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -40,6 +46,14 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" class="form-control" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -73,5 +87,11 @@
             </div>
         </div>
     </div>
+			<div class='row justify-content-center'>
+				<a href="/auth/facebook" class="button facebook"><span><i class="icon-facebook"></i></span><p>Facebook</p></a>
+  				<a href="/auth/twitter" class="button twitter"><span><i class="icon-twitter"></i></span><p>Twitter</p></a>
+				<a href="/auth/google" class="button google-plus"><span><i class="icon-google-plus"></i></span><p>Google +</p></a>
+  				<a href="/auth/github" class="button github"><span><i class="icon-github"></i></span><p>Github</p></a>
+			</div>
 </div>
 @endsection

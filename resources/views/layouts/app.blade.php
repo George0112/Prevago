@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--script src="{{ asset('js/app.js') }}" defer></script-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -37,6 +37,7 @@
 
     <!-- dataPicker -->
     <script src="{{ asset('js/datepicker/js/bootstrap-datepicker.js')}}"> </script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
 
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
@@ -59,29 +60,18 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button-->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
-                    <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control" id="checkInDate">
-                        <input type="text" class="form-control" id="checkOutDate">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -112,17 +102,9 @@
     </div>
     <!-- js use for all websites -->
     <!--script src=" {{ asset('js/index.js')}}"></script-->
-    <script type='text/javascript'>                    
-        $(function () {
-            if (jQuery.ui) {
-                var datepicker = $.fn.datepicker.noConflict();
-                $.fn.bootstrapDP = datepicker;
-            } else {
-                $.fn.bootstrapDP = $.fn.datepicker;
-            }
-            $('#checkInDate').bootstrapDP();
-            $('#checkOutDate').bootstrapDP();
-        });
-    </script>
+    <!--script type='text/javascript'>                    
+    	$("#checkInDate").datepicker();
+	</script-->
+  @yield('script')
 </body>
 </html>

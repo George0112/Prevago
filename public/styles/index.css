@@ -1,0 +1,183 @@
+body{
+  height: 1000px;
+  background-image: url("background.JPG");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto 100%;
+  background-position-y: 37%;
+
+}
+.title{
+  color:white;
+}
+.description{
+  font-family:"微軟雅黑","Microsoft YaHei","宋體",Arial,"微軟正黑體","Microsoft JhengHei";
+  color:white;
+  font-size: 20px;
+}
+.suggestList{
+  width: 95%;
+  position: absolute;
+  top : 80px;
+  background-color: rgba(255,255,255,1);
+  color : black;
+  z-index: 1;
+}
+.suggestItem{
+  font-size: 20px;
+  padding: 15px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+.suggestItem:hover{
+  background-color: rgba(3,125,106,0.8);
+}
+.roomList{
+  width: calc(50% - 2px);
+  position: absolute;
+  top : 200px;
+  right: 0;
+  background-color: rgba(255,255,255,1);
+  color : black;
+  z-index: 1;
+}
+.roomItem{
+  text-align: center;
+  font-size: 20px;
+  padding: 15px;
+  border-bottom: 1px solid black;
+
+}
+.minus{
+  float: left;
+  cursor: pointer;
+}
+.plus{
+  float: right;
+  cursor: pointer;
+}
+.name-input{
+  display: block;
+  width: 100%;
+
+  height: 75px;
+  padding: 10px;
+  margin:20px 0;
+  font-size: 25px;
+  border-radius: 5px;
+  border-bottom: 7px solid rgb(5,58,68);
+}
+.date-input{
+  display: inline;
+  background-color: white !important;
+  width: calc(50% - 2px);
+  cursor: pointer;
+  height: 60px;
+  font-size: 20px;
+  border-bottom: 7px solid rgb(5,58,68);
+}
+.room-input{
+  display: inline;
+  width: calc(50% - 2px);
+  cursor: pointer;
+  height: 60px;
+  padding: 11px 0 7px 0;
+  margin:19px 0 20px 0;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+  border-bottom: 7px solid rgb(5,58,68);
+  box-sizing: border-box;
+}
+.Search-button{
+  border-radius: 5px;
+  background-color: rgba(3,125,106);
+  color : white;
+  font-size: 20px;
+  height: 60px;
+  width: calc(50% - 2px);
+  margin: 0 auto;
+  border: 0;
+  border-bottom: 1px solid rgb(5,58,68);
+}
+.moreSearch-toggle{
+  width: 100%;
+  background-color: rgba(255,255,255,0.5);
+  color: rgb(5,58,68);
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+.more-search{
+  display:none;
+  background-color: rgba(255,255,255,0.5);
+  height: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+.search-text{
+  font-family:"微軟雅黑","Microsoft YaHei","宋體",Arial,"微軟正黑體","Microsoft JhengHei";
+  color: rgb(5,58,68);
+  font-size: 20px;
+  font-weight: 600;
+  width: 10%;
+}
+.budget-slider {
+    display: inline !important;
+    -webkit-appearance: none;
+    width: 50% !important;
+    height: 10px;
+    border-radius: 5px;   
+    background: rgb(128,128,128);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.budget-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: rgb(3,125,106);
+    cursor: pointer;
+}
+
+.budget-slider::-moz-range-progress {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(3,125,106);
+    cursor: pointer;
+}
+.score-checkbox-list{
+  display: inline;
+}
+.score-checkbox{
+  cursor:pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 0 20px !important;
+  color: rgb(3,125,106) !important;
+}
+.checkbox-text{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(5,58,68) !important;
+  margin-left: -15px;
+}
+.score-slider::-moz-range-progress {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(3,125,106);
+    cursor: pointer;
+}
+.more-search-item{
+  margin-bottom: 50px;
+}
