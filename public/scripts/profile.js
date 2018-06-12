@@ -4,6 +4,7 @@ console.log(history);
 function editemail(){
     
     $("#email_edit_text").on("click",function(e){
+        
         $(".email-input").val(email);
         $(".email_content").css({'opacity': 1,'display': 'none'});
         $(".email_edit").css({'opacity': 1,'display': 'none'});
@@ -13,34 +14,50 @@ function editemail(){
         $(".email_editing").css({'opacity': 1,'display': 'none'});
         $(".email_content").css({'opacity': 1,'display': 'block'});
         $(".email_edit").css({'opacity': 1,'display': 'block'});
+        $(".email-input").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
         
     })
     $("#email_submit").on("click",function(e){
-        var r=confirm("Sure about this?");
-        if(r==true){
-            var email_val = $('.email-input');
-            var val=email_val.val();
-            $.ajax({
-                async: true,
-                url: `https://prevago.tk/updateEmail?email=${val}`,
-                type: "GET",
-                success: function(data){
-                    console.log(data);
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){  
-                        console.log(XMLHttpRequest.status);  
-                        console.log(XMLHttpRequest.readyState);  
-                        console.log(textStatus);  
-                } 
-            });
-        
-            alert("Edit Success!");
-            $(".email_editing").css({'opacity': 1,'display': 'none'});
-            $(".email_content").css({'opacity': 1,'display': 'block'});
-            $(".email_edit").css({'opacity': 1,'display': 'block'});
-            window.location.reload();
+
+        var check;
+        var email_val = $('.email-input');
+        console.log(email_val);
+        emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+ 
+
+        if(email_val.val().search(emailRule)!= -1){
+            check=1;
+        }else{
+            check=0;
         }
-        
+        if(check){
+            var r=confirm("Sure about this?");
+            if(r==true){
+                var email_val = $('.email-input');
+                var val=email_val.val();
+                $.ajax({
+                    async: true,
+                    url: `https://prevago.tk/updateEmail?email=${val}`,
+                    type: "GET",
+                    success: function(data){
+                        console.log(data);
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){  
+                            console.log(XMLHttpRequest.status);  
+                            console.log(XMLHttpRequest.readyState);  
+                            console.log(textStatus);  
+                    } 
+                });
+            
+                alert("Edit Success!");
+                $(".email_editing").css({'opacity': 1,'display': 'none'});
+                $(".email_content").css({'opacity': 1,'display': 'block'});
+                $(".email_edit").css({'opacity': 1,'display': 'block'});
+                window.location.reload();
+            }
+        }else{
+            $(".email-input").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
+        }
     })
 };
 function editPhone(){
@@ -197,7 +214,16 @@ function list_favoritesHotels(){
                 `);
                 $(`#fav_${id}`).find(".fav_readmore").click(function(){
                     var Today=new Date();
-                    var c_date = Today.getFullYear()+'-'+(Today.getMonth()+1)+'-'+Today.getDate();
+                    var T_month=Today.getMonth()+1;
+                    var T_day=Today.getDate();
+                    if(Today.getMonth()+1<10){
+                        T_month='0'+(Today.getMonth()+1);
+                    }
+                    if(Today.getDate()<10){
+                        T_day='0'+Today.getDate();
+                    }
+
+                    var c_date = Today.getFullYear()+'-'+T_month+'-'+ T_day;
                     window.location.href=`https://prevago.tk/hotel?hotelId=${favoriteHotels[id].hotelId}&checkInDate=${c_date}`;
                 })
                 $(`#fav_${id}`).find(".fav_remove").click(function(){
@@ -297,7 +323,16 @@ function list_history(){
                 `);
                 $(`#his_${id}`).find(".fav_readmore").click(function(){
                     var Today=new Date();
-                    var c_date = Today.getFullYear()+'-'+(Today.getMonth()+1)+'-'+Today.getDate();
+                    var T_month=Today.getMonth()+1;
+                    var T_day=Today.getDate();
+                    if(Today.getMonth()+1<10){
+                        T_month='0'+(Today.getMonth()+1);
+                    }
+                    if(Today.getDate()<10){
+                        T_day='0'+Today.getDate();
+                    }
+
+                    var c_date = Today.getFullYear()+'-'+T_month+'-'+ T_day;
                     window.location.href=`https://prevago.tk/hotel?hotelId=${history[id].hotelId}&checkInDate=${c_date}`;
                 });
             },

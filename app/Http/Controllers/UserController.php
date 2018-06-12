@@ -91,6 +91,9 @@ class userController extends Controller
 	{
 		$email = $request['email'];
 		$user = Auth::user();
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    		return 'fail';
+		}
 		DB::table('users')->where('id', $user['id'])->update(['email'=>$email]);
 	}
 	public function updatePhone(Request $request)
