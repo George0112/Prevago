@@ -12,8 +12,8 @@ function drawResult(agodaPriceX, agodaPriceY, bookingPriceX, bookingPriceY, pric
             width: WIDTH_IN_PERCENT_OF_PARENT + '%',
             'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%',
 
-            height: HEIGHT_IN_PERCENT_OF_PARENT + 'vh',
-            'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
+            height: HEIGHT_IN_PERCENT_OF_PARENT + 'vh'
+            //'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
         });
     var gd = gd3.node();
     var trace1 = {
@@ -130,11 +130,13 @@ function drawResult(agodaPriceX, agodaPriceY, bookingPriceX, bookingPriceY, pric
     };
 }
 function setRoomId(id, title){
+	$("#demo").hide();
+	$("#Plot").html("請稍等...");
 	roomId = id;
 	roomTitle = title;
 	//console.log(checkInDate);
 	setTimeout(function(){ 
-	//	$(".loading").css({ "display" : "none"});
+		//$(".loading").css({ "display" : "none"});
 		requestResult(); 
 		}, 500);
 }
@@ -146,6 +148,7 @@ function requestResult(){
         type: "GET",
         success: function(data){
           console.log(data);
+		  $("#Plot").html("");
 		  loadResultData(data);
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){  
@@ -176,27 +179,32 @@ function loadResultData(resultList){
 	for(var i in resultList){
 		//console.log(resultList[i]);
 		if(resultList[i].supplier == "Agoda.com"){
-			Prices.agodaPriceX.push(resultList[i].queryDate);
+			Prices.agodaPriceX.push(resultList[i].queryDate.split("-").join("."));
 			Prices.agodaPriceY.push(resultList[i].price);
-			Rooms.agodaRoomX.push(resultList[i].queryDate);
+			Rooms.agodaRoomX.push(resultList[i].queryDate.split("-").join("."));
 			Rooms.agodaRoomY.push(resultList[i].roomLeft);
 		}
 		else if(resultList[i].supplier == "Booking.com"){
-			Prices.bookingPriceX.push(resultList[i].queryDate);
+			Prices.bookingPriceX.push(resultList[i].queryDate.split("-").join("."));
 			Prices.bookingPriceY.push(resultList[i].price);
-			Rooms.bookingRoomX.push(resultList[i].queryDate);
+			Rooms.bookingRoomX.push(resultList[i].queryDate.split("-").join("."));
 			Rooms.bookingRoomY.push(resultList[i].roomLeft);
 		}
 		else if(resultList[i].supplier == "Priceline.com"){
-			Prices.pricelinePriceX.push(resultList[i].queryDate);
+			Prices.pricelinePriceX.push(resultList[i].queryDate.split("-").join("."));
 			Prices.pricelinePriceY.push(resultList[i].price);
-			Rooms.pricelineRoomX.push(resultList[i].queryDate);
+			Rooms.pricelineRoomX.push(resultList[i].queryDate.split("-").join("."));
 			Rooms.pricelineRoomY.push(resultList[i].roomLeft);
 		}
 	}
 	//console.log(Prices);
-	drawResult(Prices.agodaPriceX, Prices.agodaPriceY, Prices.bookingPriceX, Prices.bookingPriceY, Prices.pricelinePriceX, Prices.pricelinePriceY, Rooms.agodaRoomX, Rooms.agodaRoomY, Rooms.bookingRoomX, Rooms.bookingRoomY, Rooms.pricelineRoomX, Rooms.pricelineRoomY);
-	
+	if(Prices.agodaPriceY.length==0&&Prices.bookingPriceY.length==0&&Prices.pricelinePriceY.length==0){
+	  $("#Plot").html("很抱歉這段期間並無空房");
+	}
+	else{
+	  $("#demo").show();
+	  drawResult(Prices.agodaPriceX, Prices.agodaPriceY, Prices.bookingPriceX, Prices.bookingPriceY, Prices.pricelinePriceX, Prices.pricelinePriceY, Rooms.agodaRoomX, Rooms.agodaRoomY, Rooms.bookingRoomX, Rooms.bookingRoomY, Rooms.pricelineRoomX, Rooms.pricelineRoomY);
+	}
 }
 function requestRooms(){
     $.ajax({
@@ -329,21 +337,26 @@ function loadProperty(data){
 	//load room
 	if(!isInDatabase){
 		var htmlText = "";
-		htmlText = htmlText + "<h5>現有"+roomInfo.length+"種房型</h5>";
-		for(var i in roomInfo){
-			htmlText = htmlText + '<div class="container room shadow"><div class="row roomName">';
-			htmlText = htmlText + '<h4>'+roomInfo[i].name+'</h4>';
-			htmlText = htmlText + `</div>
-				<div class="row roomInfo">
-					<div class="col-sm-3 roomCol">
-						<img class="roomImage" src='styles/notFound.png'>
-					</div>
-					<div class="col-sm-3 roomDetail">
-					</div>
-			`;
-			htmlText = htmlText + '<div class="col-sm-3 price roomCol"><div><a class="chartLink"><span class="label label-info" >很抱歉我們沒有這裡的資料</span></a></div></div></div></div>';
+		if(roomInfo){
+			htmlText = htmlText + "<h5>現有"+roomInfo.length+"種房型</h5>";
+			for(var i in roomInfo){
+				htmlText = htmlText + '<div class="container room shadow"><div class="row roomName">';
+				htmlText = htmlText + '<h4>'+roomInfo[i].name+'</h4>';
+				htmlText = htmlText + `</div>
+					<div class="row roomInfo">
+						<div class="col-sm-3 roomCol">
+							<img class="roomImage" src='styles/notFound.png'>
+						</div>
+						<div class="col-sm-3 roomDetail">
+						</div>
+				`;
+				htmlText = htmlText + '<div class="col-sm-3 price roomCol"><div><a class="chartLink"><span class="label label-info" >很抱歉我們沒有這裡的歷史價格資料</span></a></div></div></div></div>';
+			}
+			$("#hotel").append(htmlText);
 		}
-		$("#hotel").append(htmlText);
+		else{
+			$("#hotel").append("<div class='row'><div class='col-sm-12 noRoom'>很抱歉我們沒有這裡的房間資訊</div></div>");
+		}
 	}
 	
 	for(var k in roomInfo){

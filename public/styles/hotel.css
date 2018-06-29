@@ -290,6 +290,20 @@ img.active, .demo:hover {
 	font-size: 18px;
 	padding: 10px;
 }
+#Plot{
+	text-align: center;
+	font-size: 18px;
+}
+#demo{
+	font-size: 14px;
+	color: #0283DF;
+}
+.noRoom{
+	text-align: center;
+	font-size: 20px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
 @media (max-width: 768px) {
 	.price{
 		padding-top: 30px;

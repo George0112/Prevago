@@ -12,14 +12,14 @@ body{
 }
 #web-name-input{
   display: inline;
-  width: 35%;
+  width: 33%;
   height: 50px;
   margin: 3px;
   border-radius: 5px;
   padding: 10px;
 }
 .date-input{
-  width: 15%;
+  width: 17%;
   height: 50px;
   margin: 3px;
   display: inline; 

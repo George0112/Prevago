@@ -154,7 +154,7 @@ class agodaController extends Controller
 	//if($json_a['essentialInfo'])
     //$result['essentialInfo'] = $json_a['essentialInfo'];
     $result['featuresYouLove'] = $json_a['featuresYouLove'];
-	//if($json_a['featuresYouLove'])
+	if(array_key_exists("masterRoomInfo", $json_a))
     $result['masterRoomInfo'] = $json_a['masterRoomInfo'];
     $result['hotelInfo'] = $json_a['hotelInfo'];
     $result['mosaicInitData'] = $json_a['mosaicInitData'];

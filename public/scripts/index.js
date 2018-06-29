@@ -10,7 +10,7 @@ var Info = {
   budget : 0,
   score : 0,
   stars : 0 ,
-  searchType : -1,
+  searchType : 1,
   ResultUrl : ""
 };
 
@@ -83,23 +83,23 @@ function dynamicLoad(){
           dataType : "json",
           type: "GET",
           success: function(data){
-              console.log(data)
+              console.log(data);
               suggestList(data.ViewModelList);
           },
           error:function(XMLHttpRequest, textStatus, errorThrown){  
-                  console.log(XMLHttpRequest.status);  
-                  console.log(XMLHttpRequest.readyState);  
-                  console.log(textStatus);  
+              Info.ObjectId = 0;
+              Info.CityId = 0;  
             } 
         });
     })
 }
 function suggestList(lists){
   $(".suggestList").empty();
+  
   for(var i = 1;i< lists.length;i++){
-      $(".suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].ResultText+"</div>");
+      $(".suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].DisplayNames.Name+"</div>");
   }
-  if(lists[i]!= 'undefined'){
+  if(typeof(lists[1]) != 'undefined'){
     Info.CityId = lists[1].CityId;
     Info.ObjectId = lists[1].ObjectId;
     Info.searchType = lists[1].SearchType;
@@ -113,6 +113,13 @@ function suggestList(lists){
     conosle.log(Info.ResultUrl);*/
   
   }
+  else{
+    console.log("no result");
+    Info.CityId = 0;
+    Info.ObjectId = 0;
+    Info.searchType = 0;
+  //  console.log(Info);
+  }
 $(".suggestItem").on("click", function(e){
   var value = $(this).text();
   $(".name-input").val(value);
@@ -125,6 +132,7 @@ $(".suggestItem").on("click", function(e){
     var url = lists[num].ResultUrl;
     Info.ResultUrl = url.split('hotel=')[1].split('&')[0];
     console.log(Info.ResultUrl);
+    Info.searchType = 4;
   }
 
 });
@@ -180,6 +188,7 @@ function roomChoose(){
       $('.room-input').val(`${Info.rooms}間房間、${Info.adult}位大人、${Info.children}位兒童`);
   });
 }
+/*
 function chk(input)
 {
   for(var i=0;i<document.form1.c1.length;i++)
@@ -191,12 +200,49 @@ function chk(input)
   input.checked = true;
   return true;
 }
+*/
+function initChk(){
+  var ck1 = chk("ck1");
+  var ck2 = chk("ck2");
+  var ck3 = chk("ck3");
+  $("#ck1").click(function(){
+    ck1.clearAll();
+    ck1.setChk();
+  });
+  $("#ck2").click(function(){
+    ck2.clearAll();
+    ck2.setChk();
+  });
+  $("#ck3").click(function(){
+    ck3.clearAll();
+    ck3.setChk();
+  });
+}
+function chk(id)
+{
+
+  return{
+    clearAll: function clearAll(){
+      for(var i=0;i<document.form1.c1.length;i++)
+      {
+        document.form1.c1[i].checked = false;
+      }
+
+    },
+    setChk: function setChk(){
+      Info.score =  $(`#${id}`).val();
+      $(`#${id}`).prop("checked", true);
+
+    }
+  } 
+}
 function submit(){
   $(".Search-button").click(function(){
     var date = $("#fromDate").val();
     var sentence = date.split('/');
-    Info.checkIn = sentence[2]+'-'+sentence[0]+'-'+sentence[1];
-    
+    console.log(date);
+    //Info.checkIn = sentence[2]+'-'+sentence[0]+'-'+sentence[1];
+    Info.checkIn = date;
     /*$.ajax({
       url: `http://140.114.79.72:8888/api/hotels/result`,
       type: "POST",
@@ -217,7 +263,8 @@ function submit(){
                             &starRating=${totalStars}&max=${Info.budget}&LocationScore=${Info.score}&page=1`;
     }
     else{
-      window.location.href=`./searchList?resultUrl=${Info.ResultUrl}&searchType=${Info.searchType}&objectId=${Info.ObjectId}&cityId=${Info.CityId}&adults=${Info.adult}&rooms=${Info.rooms}&children=${Info.children}&checkInDate=${Info.checkIn}&page=1`;
+    console.log(Info);
+        window.location.href=`./searchList?resultUrl=${Info.ResultUrl}&searchType=${Info.searchType}&objectId=${Info.ObjectId}&cityId=${Info.CityId}&adults=${Info.adult}&rooms=${Info.rooms}&children=${Info.children}&checkInDate=${Info.checkIn}&page=1`;
     }
     
   });
@@ -233,9 +280,9 @@ function fb(){
 window.onload = function(){
   var Today=new Date();
 
-  Info.checkIn = (Today.getMonth()+1)+'/'+Today.getDate()+'/'+Today.getFullYear();
+  Info.checkIn = Today.getFullYear()+'-0'+(Today.getMonth()+1)+'-'+Today.getDate();
   $('#fromDate').val(Info.checkIn);
-  $(".date-input").datepicker();
+  //$(".date-input").datepicker();
 
   $(".moreSearch-toggle").click(function(){
     Info.moreSearch = !Info.moreSearch;
@@ -254,6 +301,7 @@ window.onload = function(){
   dynamicLoad();
   roomChoose();
   submit();
+  initChk();
   //fb();
 
 }

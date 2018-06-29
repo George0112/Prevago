@@ -134,6 +134,11 @@
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body" id="chart">
+			<div id="demo">
+			  <p>價格走向為折線圖<br>
+			  空房率為長條圖<br>
+			  入住日期以前無資料點表示無空房</p>
+			</div>
 			<div id="Plot"></div><!-- Price chart and Room chart will be drawn inside this DIV -->
         </div>
       </div>

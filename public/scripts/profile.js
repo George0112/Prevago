@@ -1,6 +1,8 @@
-console.log(favoriteHotels);
+// var lt = /</g, 
+//     gt = />/g, 
+//     ap = /'/g, 
+//     ic = /"/g;
 
-console.log(history);
 function editemail(){
     
     $("#email_edit_text").on("click",function(e){
@@ -21,7 +23,6 @@ function editemail(){
 
         var check;
         var email_val = $('.email-input');
-        console.log(email_val);
         emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
  
 
@@ -134,33 +135,37 @@ function editpassword(){
     })
 };
 function Modify_check(){
+    return function(){
     var val1=$('.p1').val();
     var val2=$('.p2').val();
     var val3=$('.p3').val();
-    $(".p1").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
-    $(".p2").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
-    $(".p3").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
-
-    if(val1=="" || val2=="" || val3==""){
-
-        if(val1==""){
-            $(".p1").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
-        }
-        if(val2==""){
-            $(".p2").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
-        }
-        if(val3==""){
-            $(".p3").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
-        }
-
-        return false;
-    }else{
-        var r=confirm("Sure about this?");
-        console.log(r);
-        return r;
-    }
     
+        $(".p1").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
+        $(".p2").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
+        $(".p3").css({'box-shadow':'4px 4px 20px rgba(0, 0, 0, 0)'});
+
+        if(val1=="" || val2=="" || val3==""){
+
+            if(val1==""){
+                $(".p1").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
+            }
+            if(val2==""){
+                $(".p2").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
+            }
+            if(val3==""){
+                $(".p3").css({'box-shadow':'4px 4px 20px rgba(200, 0, 0, 0.85)'});
+            }
+
+            return false;
+        }else{
+            var r=confirm("Sure about this?");
+            console.log(r);
+            return r;
+        }
+    }
 }
+
+var check = Modify_check();
 
 function Modify_error(){
     
@@ -171,14 +176,10 @@ function Modify_error(){
     $(".password_editing2").css({'opacity': 1,'display': 'block'});
     alert("Modify Password fail!");
 }
-function list_favoritesHotels(){
-    //console.log(favoriteHotels);
-    var result;
-    var lt = /</g, 
-    gt = />/g, 
-    ap = /'/g, 
-    ic = /"/g;
 
+function list_favoritesHotels(lt,gt,ap,ic){
+   
+    return function(){
     for(var i in favoriteHotels){
         console.log(i);
         (function(id){
@@ -216,6 +217,7 @@ function list_favoritesHotels(){
                     var Today=new Date();
                     var T_month=Today.getMonth()+1;
                     var T_day=Today.getDate();
+                    
                     if(Today.getMonth()+1<10){
                         T_month='0'+(Today.getMonth()+1);
                     }
@@ -258,44 +260,9 @@ function list_favoritesHotels(){
         });
         })(i);
     }
+    }
 }
-// function list_favoritesRooms(){
-//     //console.log(favoriteHotels);
-//     var result;
-//     for(var i in favoriteHotels){
-        
-//         $.ajax({
-//             async: true,
-//             url: `https://prevago.tk/api/hotel/id?hotelId=${favoriteHotels[i].hotelId}`,
-//             type: "GET",
-//             success: function(data){
-//                 console.log(data);
-//                 $(".favoriteHotelsList").append(`
-// 					<div id="fav_${i}" class="fav_list_item row">
-// 						<div class='col-md-4'>
-// 							<img class='img img-responsive' src='https:${data.mosaicInitData.images[0].location}'>
-// 						</div>                     
-//                     	<div class="col-md-8 favorite-text">
-// 							<div class='title'>${data.hotelInfo.name}</div>
-// 							<div class='des'>
-// 								<a href='#'>
-// 									<i class='fav_readmore'>Read More</button>
-// 								</a>
-// 							</div>
-// 						</div>
-//                     </div>
-// 				`);
-                
-//             },
-//             error:function(XMLHttpRequest, textStatus, errorThrown){  
-//                     console.log(XMLHttpRequest.status);  
-//                     console.log(XMLHttpRequest.readyState);  
-//                     console.log(textStatus);  
-//             } 
-//         });
-        
-//     }
-// }
+
 function list_history(){
     var result;
     for(var i in history){
@@ -347,6 +314,7 @@ function list_history(){
     }
 
 }
+var list_hot=list_favoritesHotels(/</g,/>/g,/'/g,/"/g);
 function changeList(){
     $("#his").on("click",function(e){
         $("#fav_hot").css({'color': 'rgba(192,192,192,0.5)'});
@@ -362,9 +330,11 @@ function changeList(){
     })
 }
 function empty(){
+
     $(".favoriteHotelsList").empty();
     $(".historyList").empty();
 }
+
 
 
 window.onload=function(){
@@ -374,7 +344,8 @@ window.onload=function(){
     editpassword();
 
     empty();
-    list_favoritesHotels();
+    list_hot();
+    //list_favoritesHotels();
     //list_favoritesRooms();
     list_history();
     changeList();

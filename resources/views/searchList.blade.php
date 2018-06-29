@@ -26,7 +26,7 @@
   
       <input type="text" class="name-input" id="web-name-input" placeholder="Country" autocomplete="off"/>
         <div class="suggestList" id="web-suggestList"></div>
-      <input type="text" class="form-control date-input"  id="fromDate" value="06/15/2018" readonly="readonly"/>
+      <input type="date" class="form-control date-input"  id="fromDate" value="06/15/2018"/>
       <input type="text" class="room-input" id="web-room-input" value="1間房間、2位大人、0位兒童" readonly="readonly"/>
         <div class="roomList" id="web-roomList">
           <div class="roomItem" id="rooms"><span class="minus">-</span>room<span class="plus">+</span></div>
@@ -43,7 +43,7 @@
       <button class="mobile-pop-up-canael">X</button>
       <input type="text" class="name-input" id="mobile-name-input" placeholder="Country" autocomplete="off"/>
         <div class="suggestList" id="mobile-suggestList"></div>
-      <input type="text" class="form-control mobile-date-input"  id="fromDate" value="06/15/2018" readonly="readonly"/>
+      <input type="date" class="form-control mobile-date-input"  id="fromDate" value="06/15/2018"/>
       <input type="text" class="room-input" id="mobile-room-input" value="1間房間、2位大人、0位兒童" readonly="readonly"/>
         <div class="roomList" id="mobile-roomList">
           <div class="roomItem" id="rooms"><span class="minus">-</span>room<span class="plus">+</span></div>

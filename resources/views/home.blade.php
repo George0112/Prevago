@@ -14,7 +14,7 @@
       
         <input type="text" class="name-input left-input" placeholder="Country" />
           <div class="suggestList"></div>
-        <input type="text" class="form-control date-input left-input"  id="fromDate" value="06/07/2018" readonly="readonly"/>
+        <input type="date" name="bday" class="form-control date-input left-input"  id="fromDate" value="06/07/2018" />
         <input type="text" class="room-input left-input" value="1間房間、2位大人、0位兒童" readonly="readonly"/>
           <div class="roomList">
             <div class="roomItem" id="rooms"><span class="minus">-</span>room<span class="plus">+</span></div>
@@ -36,11 +36,11 @@
         <div class="more-search-item">
           <span class="search-text">評分</span>
           <form name="form1" class="score-checkbox-list">
-            <input class="score-checkbox" type="checkbox" name="c1" value="7" onclick="return chk(this);">
+            <input class="score-checkbox" type="checkbox" name="c1" value="7" id="ck1">
             <span class="checkbox-text">7+</span>
-            <input class="score-checkbox" type="checkbox" name="c1" value="8" onclick="return chk(this);">
+            <input class="score-checkbox" type="checkbox" name="c1" value="8" id="ck2">
             <span class="checkbox-text">8+</span>
-            <input class="score-checkbox" type="checkbox" name="c1" value="9" onclick="return chk(this);">
+            <input class="score-checkbox" type="checkbox" name="c1" value="9" id="ck3">
             <span class="checkbox-text">9+</span>
           </form>
         </div>

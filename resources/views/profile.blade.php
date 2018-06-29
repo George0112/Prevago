@@ -129,7 +129,7 @@
               </div>
             </div>
             <div class="col-md-5 password_editing">
-              <form onsubmit="return Modify_check()"  id="form-change-password" role="form" method="POST" action="{{ url('https://prevago.tk/updatePassword') }}" novalidate class="form-horizontal" >
+              <form onsubmit="return check()"  id="form-change-password" role="form" method="POST" action="{{ url('https://prevago.tk/updatePassword') }}" novalidate class="form-horizontal" >
                 <div >             
                   <label for="current-password" class="control-label">Current Password</label>
                   <div >

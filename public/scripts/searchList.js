@@ -12,7 +12,7 @@ var Info = {
   rooms : 1,
   CityId : 0,
   ObjectId : 0,
-  checkIn : "06/15/2018",
+  checkIn : "2018-06-19",
   moreSearch : false,
   budget : 0,
   score : 0,
@@ -29,8 +29,8 @@ $(window).load(function(){
 
   console.log(isLogin);
   loadHotels();
-  $(".date-input").datepicker();
-  $(".mobile-date-input").datepicker();
+  //$(".date-input").datepicker();
+  //$(".mobile-date-input").datepicker();
   fixedSearchBar();
   $(".mobile-search-bar-toggle").click(function(){
       $(".mobile-search-pop-up").slideToggle("fast");
@@ -52,9 +52,9 @@ function init(){
     Info.rooms = result.info.rooms;
     Info.CityId = result.info.cityId;
     Info.ObjectId = result.info.objectId;
-    var date = result.info.checkInDate.split('-');
-    Info.checkIn = date[1]+'/'+date[2]+'/'+date[0];
-
+    //var date = result.info.checkInDate.split('-');
+    Info.checkIn = result.info.checkInDate;
+    
     Info.budget = (result.info.max == undefined)?0:result.info.max;
     Info.score = (result.info.locationScore[0] == undefined)?0:result.info.locationScore[0];
     Info.stars = (result.info.starRating[result.info.starRating.length-1] == undefined)?0:result.info.starRating[result.info.starRating.length-1];
@@ -123,7 +123,7 @@ function submit(){
   $(".Search-button").click(function(){
     var date = $("#fromDate").val();
     var sentence = date.split('/');
-    Info.checkIn = sentence[2]+'-'+sentence[0]+'-'+sentence[1];
+    Info.checkIn = date;
     
     /*$.ajax({
       url: `http://140.114.79.72:8888/api/hotels/result`,
@@ -194,9 +194,9 @@ function dynamicLoad(){
 function websuggestList(lists){
   $("#web-suggestList").empty();
   for(var i = 1;i < lists.length ; i++){
-      $("#web-suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].ResultText+"</div>");
+      $("#web-suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].DisplayNames.Name+"</div>");
   }
-  if(lists[i]!= 'undefined'){
+  if(typeof(lists[1])!= 'undefined'){
     Info.CityId = lists[1].CityId;
     Info.ObjectId = lists[1].ObjectId;
     Info.searchType = lists[1].SearchType;
@@ -205,6 +205,13 @@ function websuggestList(lists){
       Info.ResultUrl = url.split('hotel=')[1].split('&')[0];
       console.log(Info.ResultUrl);
     }
+  }
+  else{
+    console.log("no result");
+    Info.CityId = 0;
+    Info.ObjectId = 0;
+    Info.searchType = 0;
+  //  console.log(Info);
   }
 $(".suggestItem").on("click", function(e){
   var value = $(this).text();
@@ -219,6 +226,7 @@ $(".suggestItem").on("click", function(e){
     var url = lists[num].ResultUrl;
     Info.ResultUrl = url.split('hotel=')[1].split('&')[0];
     console.log(Info.ResultUrl);
+    Info.searchType = 4;
   }
   console.log(Info);
 });
@@ -242,9 +250,9 @@ $(".suggestItem").on("click", function(e){
 function mobilesuggestList(lists){
   $("#mobile-suggestList").empty();
   for(var i=1;i< lists.length;i++){
-      $("#mobile-suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].ResultText+"</div>");
+      $("#mobile-suggestList").append(`<div class='suggestItem' id=${i}>`+lists[i].DisplayNames.Name+"</div>");
   }
-  if(lists[i]!= 'undefined'){
+  if(typeof(lists[1])!= 'undefined'){
     Info.CityId = lists[1].CityId;
     Info.ObjectId = lists[1].ObjectId;
     Info.searchType = lists[1].SearchType;
@@ -253,6 +261,13 @@ function mobilesuggestList(lists){
       Info.ResultUrl = url.split('hotel=')[1].split('&')[0];
       console.log(Info.ResultUrl);
     }
+  }
+  else{
+    console.log("no result");
+    Info.CityId = 0;
+    Info.ObjectId = 0;
+    Info.searchType = 0;
+  //  console.log(Info);
   }
 $(".suggestItem").on("click", function(e){
   var value = $(this).text();
@@ -267,6 +282,7 @@ $(".suggestItem").on("click", function(e){
     var url = lists[num].ResultUrl;
     Info.ResultUrl = url.split('hotel=')[1].split('&')[0];
     console.log(Info.ResultUrl);
+    
   }
   console.log(Info);
 });
